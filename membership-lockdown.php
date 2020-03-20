@@ -78,9 +78,10 @@ final class swMember_Lockdown {
           }
       }
   }
+
   /**
    * get the lockdown status
-   * @return [bool]
+   * @return boolean
    */
   public function lockdown(){
     $lockdown = get_option( 'mlockdown_status' );

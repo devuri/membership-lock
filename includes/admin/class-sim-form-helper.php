@@ -1,6 +1,6 @@
 <?php
 
-  namespace simForm;
+namespace simForm;
 
 /**
  * Sim_Form_Helper
@@ -11,89 +11,168 @@ final class Sim_Form_Helper
 {
 
   /**
-   * Input Field
+   * require
    *
-   * @param  string  $name     the name of the field
-   * @param  boolean $required set if this field is a required field
-   * @param  string  $type     the field type
+   * set field as required, defaults to false
+   *
+   * @param  boolean $required
    * @return
    */
-  public function input($name='name',$required=false,$type='text'){
-    $name = strtolower($name);
-    // set reuired
+  public function require($required = false){
     if ($required) {
-      // code...
       $require = ' <span class="description">(required)</span>';
     } else {
       $require = '';
     }
+    return $require;
+  }
+
+  /**
+   * Input Field
+   *
+   * @param  string  $fieldname     the name of the field
+   * @param  boolean $required set if this field is a required field
+   * @param  string  $type     the field type
+   * @return
+   */
+  public function input($fieldname='name',$required = false,$type='text'){
+    $fieldname = strtolower($fieldname);
+    // set reuired
+    $require = $this->require($required);
+
     // lets build out the input
-    $input  = '<!-- '.$name.'_input -->';
+    $input  = '<!-- input field '.$fieldname.'_input -->';
     $input .= '<tr class="input">';
     $input .= '<th>';
-    $input .= '<label for="'.str_replace(" ", "_", $name).'">';
-    $input .= ucwords(str_replace("_", " ", $name));
+    $input .= '<label for="'.str_replace(" ", "_", $fieldname).'">';
+    $input .= ucwords(str_replace("_", " ", $fieldname));
     $input .= $require;
     $input .= '</label>';
     $input .= '</th>';
     $input .= '<td>';
-    $input .= '<input type="'.$type.'" name="'.str_replace(" ", "_", $name).'" id="'.str_replace(" ", "_", $name).'" aria-describedby="'.str_replace(" ", "-", $name).'-description" value="" class="uk-input">';
-    $input .= '<p class="description" id="'.str_replace(" ", "-", $name).'-description">';
-    $input .= 'Enter '.strtolower(str_replace("_", " ", $name));
+    $input .= '<input type="'.$type.'" name="'.str_replace(" ", "_", $fieldname).'" id="'.str_replace(" ", "_", $fieldname).'" aria-describedby="'.str_replace(" ", "-", $fieldname).'-description" value="" class="uk-input">';
+    $input .= '<p class="description" id="'.str_replace(" ", "-", $fieldname).'-description">';
+    $input .= 'Enter '.strtolower(str_replace("_", " ", $fieldname));
     $input .= '<strong>.</strong>';
     $input .= '</p>';
     $input .= '</td>';
     $input .= '</tr>';
-    $input .= '<!-- '.$name.'_input -->';
+    $input .= '<!-- input field '.$fieldname.'_input -->';
     return $input;
+  }
+
+  /**
+   * page_list building our own $pages array
+   * @param  array  $arg [description]
+   * @link https://developer.wordpress.org/reference/functions/get_pages/
+   * @return array
+   */
+  public function page_list($arg = array()){
+    $arg = array(
+      'sort_column' => 'post_date',
+      'sort_order' => 'desc'
+    );
+    $pages = get_pages($arg);
+    $selectpages = array();
+    foreach ($pages as $pkey => $page) {
+      $selectpages[$pkey] = array(
+        $page->ID => $page->post_title,
+      );
+    }
+    // breakdown to key.value pairs
+    foreach ($selectpages as $wpkey => $wpages) {
+      foreach ($wpages as $vkey => $val) {
+        $page_list[$vkey] = $val;
+      }
+    }
+    return $page_list;
+  }
+
+  /**
+   * select field
+   * @param  array  $options [description]
+   * @return [type]          [description]
+   */
+  public function select($options = array(),$fieldname = 'name',$required = false){
+    // set reuired
+    $require = $this->require($required);
+
+    // lets build out the select field
+    $select  = '';
+    $select .= '<tr class="input">';
+    $select .= '<th>';
+    $select .= '<label for="'.str_replace(" ", "_", $fieldname).'">';
+    $select .= ucwords(str_replace("_", " ", $fieldname));
+    $select .= $require;
+    $select .= '</label>';
+    $select .= '</th>';
+    $select .= '<td>';
+    $select .= '<select name="'.strtolower(str_replace(" ", "_", $fieldname)).'" id="'.strtolower(str_replace(" ", "_", $fieldname)).'" class="uk-select">';
+    /**
+     * Options list Output
+     * @var array $options
+     */
+    if (is_array($options)) {
+      foreach ($options as $optkey => $optvalue) {
+        $select .= '<option value="'.$optkey.'">'.$optvalue.'</option>';
+      }
+    }
+    $select .= '</select>';
+    $select .= '<p class="description" id="'.str_replace(" ", "-", $fieldname).'-description">';
+    $select .= 'Enter '.strtolower(str_replace("_", " ", $fieldname));
+    $select .= '<strong>.</strong>';
+    $select .= '</p>';
+    $select .= '</td>';
+    $select .= '</tr>';
+    $select .= '<!-- select field '.$fieldname.'_input -->';
+    return $select;
   }
 
   /**
    * Textarea
    *
-   * @param  string  $name     field name
+   * @param  string  $fieldname     field name
    * @param  boolean $required set the filed to required
    * @return
    */
-  public function textarea($name='name',$required=false){
-    $name = strtolower($name);
+  public function textarea($fieldname='name',$required = false){
+    $fieldname = strtolower($fieldname);
     // set reuired
-    if ($required) {
-      $require = ' <span class="description">(required)</span>';
-    } else {
-      $require = '';
-    }
+    $require = $this->require($required);
+
     // lets build out the textarea
-    $textarea  = '<!-- '.$name.'_textarea -->';
+    $textarea  = '<!-- '.$fieldname.'_textarea -->';
     $textarea .= '<tr class="textarea">';
     $textarea .= '<th>';
-    $textarea .= '<label for="'.str_replace(" ", "_", $name).'">';
-    $textarea .= ucwords(str_replace("_", " ", $name));
+    $textarea .= '<label for="'.str_replace(" ", "_", $fieldname).'">';
+    $textarea .= ucwords(str_replace("_", " ", $fieldname));
     $textarea .= $require;
     $textarea .= '</label>';
     $textarea .= '</th>';
     $textarea .= '<td>';
-    $textarea .= '<textarea class="uk-textarea" name="'.str_replace(" ", "_", $name).'_textarea" rows="8" cols="50">';
+    $textarea .= '<textarea class="uk-textarea" name="'.str_replace(" ", "_", $fieldname).'_textarea" rows="8" cols="50">';
     $textarea .= '</textarea>';
-    $textarea .= '<p class="description" id="'.str_replace(" ", "-", $name).'-description">';
-    $textarea .= 'Enter '.strtolower(str_replace("_", " ", $name));
+    $textarea .= '<p class="description" id="'.str_replace(" ", "-", $fieldname).'-description">';
+    $textarea .= 'Enter '.strtolower(str_replace("_", " ", $fieldname));
     $textarea .= '<strong>.</strong>';
     $textarea .= '</p>';
     $textarea .= '</td>';
     $textarea .= '</tr>';
-    $textarea .= '<!-- '.$name.'_textarea -->';
+    $textarea .= '<!-- '.$fieldname.'_textarea -->';
     return $textarea;
   }
 
   /**
    * Custom version of the WP Dropdown Category list
    *
-   * @param  string $name   field name
+   * @param  string $fieldname   field name
    * @param  array $args define custom arguments
    * @return
    * @link https://developer.wordpress.org/reference/functions/wp_dropdown_categories/
    */
-  public function categorylist($name=null,$args = array()){
+  public function categorylist($fieldname=null,$args = array()){
+    $require = $this->require($required);
+
     $catlist_args = array(
       'show_option_all'    => '',
       'show_option_none'   => '',
@@ -107,7 +186,7 @@ final class Sim_Form_Helper
       'echo'               => 0,
       'selected'           => 0,
       'hierarchical'       => 0,
-      'name'               => strtolower(str_replace(" ", "_", $name)).'set_category',
+      'name'               => strtolower(str_replace(" ", "_", $fieldname)).'set_category',
       'id'                 => '',
       'class'              => 'uk-select',
       'depth'              => 0,
@@ -164,7 +243,7 @@ final class Sim_Form_Helper
   /**
    * nonce field
    *
-   * @param  string $name nonce field name
+   * @param  string $fieldname nonce field name
    * @return
    * @link https://developer.wordpress.org/reference/functions/wp_nonce_field/
    */

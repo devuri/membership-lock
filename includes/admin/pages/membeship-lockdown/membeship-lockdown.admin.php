@@ -9,7 +9,7 @@ if ( isset( $_POST['submit'] ) ){
 		wp_die('Verification Failed !!!');
 	}
 
-	echo $siform->input_val('youtube_video_url');
+	echo $siform->input_val('redirect_after_login');
 
 
 }
@@ -18,21 +18,12 @@ if ( isset( $_POST['submit'] ) ){
 	        // open table
 	        echo $siform->table('open');
 
-	        // Video Title
-	        echo $siform->input('YouTube Video Url',true);
-
-	        // Category
-	        echo $siform->categorylist('Video Category');
-
-	        // Description
-	        echo $siform->textarea('Description',true);
-
-	        // Tags
-	        echo $siform->input('Post Tags');
+					// Select
+					$pages = $siform->page_list();
+					echo $siform->select($pages,'Redirect After Login',true);
 
 	        // close table
 	        echo $siform->table('close');
-
 
 	        // wp_nonce_field
 	        $siform->nonce();
@@ -42,33 +33,3 @@ if ( isset( $_POST['submit'] ) ){
 
 	      ?></form>
 	    </div><!--frmwrap-->
-Where do you want to redirect users
-	<select name="page-dropdown">
- <option value="">
-<?php echo esc_attr( __( 'Select page' ) ); ?></option>
- <?php
-  $pages = get_pages();
-  foreach ( $pages as $page ) {
-    $option = '<option value="' . get_page_link( $page->ID ) . '">';
-    $option .= $page->post_title;
-    $option .= '</option>';
-    echo $option;
-  }
- ?>
-</select>
-
-<hr/>
- Also redirect after login :
- 	<select name="page-dropdown">
-  <option value="">
- <?php echo esc_attr( __( 'Select page' ) ); ?></option>
-  <?php
-   $pages = get_pages();
-   foreach ( $pages as $page ) {
-     $option = '<option value="' . get_page_link( $page->ID ) . '">';
-     $option .= $page->post_title;
-     $option .= '</option>';
-     echo $option;
-   }
-  ?>
-</select>
