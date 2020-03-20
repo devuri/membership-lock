@@ -96,6 +96,7 @@ final class Sim_Form_Helper
   public function select($options = array(),$fieldname = 'name',$required = false){
     // set reuired
     $require = $this->require($required);
+    $defualt_select = 'Select a page';
 
     // lets build out the select field
     $select  = '';
@@ -108,6 +109,7 @@ final class Sim_Form_Helper
     $select .= '</th>';
     $select .= '<td>';
     $select .= '<select name="'.strtolower(str_replace(" ", "_", $fieldname)).'" id="'.strtolower(str_replace(" ", "_", $fieldname)).'" class="uk-select">';
+    $select .= '<option selected="selected">'.$defualt_select.'</option>';
     /**
      * Options list Output
      * @var array $options
