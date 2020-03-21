@@ -9,7 +9,28 @@ namespace Switchwebdev\Admin\Si_Form;
  */
 final class Si_Form_Helper
 {
+  public $processing = false;
 
+  /**
+   * user_feedback
+   *
+   * give the user some feedback
+   *
+   * @param  string $class   the css class
+   * @param  string $message output message
+   * @return string
+   */
+  public function user_feedback($class = 'updated', $message = 'Options updated'){
+
+    //$message = 'Options updated';
+
+    $user_message  = '<div style="font-size: small; text-transform: capitalize; margin-bottom: 2.5em;" id="'.$class.'" class="updated">';
+    $user_message .= '<p>';
+    $user_message .= $message;
+    $user_message .= '</p>';
+    $user_message .= '</div>';
+    return $user_message;
+  }
   /**
    * require
    *
@@ -89,7 +110,7 @@ final class Si_Form_Helper
   public function select($options = array(),$fieldname = 'name',$required = false){
     // set reuired
     $require = $this->require($required);
-    $defualt_select = 'Select an option';
+    $defualt_select = '<option selected="selected">Select an option</option>';
 
     // lets build out the select field
     $select  = '';
@@ -102,7 +123,6 @@ final class Si_Form_Helper
     $select .= '</th>';
     $select .= '<td>';
     $select .= '<select name="'.strtolower(str_replace(" ", "_", $fieldname)).'" id="'.strtolower(str_replace(" ", "_", $fieldname)).'" class="uk-select">';
-    $select .= '<option selected="selected">'.$defualt_select.'</option>';
     /**
      * Options list Output
      * @var array $options

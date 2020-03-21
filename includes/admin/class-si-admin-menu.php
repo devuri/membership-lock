@@ -26,7 +26,7 @@ final class Si_Admin_Menu {
     /**
      * class version
      */
-    const SI_ADMIN_VERSION = '2.8.3';
+    const SI_ADMIN_VERSION = '3.1.0';
 
     /**
      * $menu_args
@@ -332,6 +332,7 @@ final class Si_Admin_Menu {
      * Main Menu
      *
      * @return
+     * @link https://developer.wordpress.org/reference/functions/add_menu_page/
      * @since 1.0
      */
     public function build_menu() {
@@ -342,14 +343,22 @@ final class Si_Admin_Menu {
       $menu_slug   = $this->menu_args[3];
       $position    = $this->menu_args[5];
       $icon_url    = $this->menu_args[6];
-      add_menu_page( $page_title, $menu_title, $capability, $menu_slug, array( $this, 'menu_callback' ), $icon_url, $position );
+      add_menu_page(
+        $page_title,
+        $menu_title,
+        $capability,
+        $menu_slug,
+        array( $this, 'menu_callback' ),
+        $icon_url,
+        $position
+      );
 
       /**
        * The admin submenu section
        *
        * here we build out the admin menus submenu items
        * for item 0 we will set the same slug as the main item
-       *
+       * @link https://developer.wordpress.org/reference/functions/add_submenu_page/
        */
       foreach ($this->submenu_args as $key => $subm_item) {
         #slugs
@@ -361,7 +370,14 @@ final class Si_Admin_Menu {
           $subm_slug = sanitize_title($subm_item);
         }
           // build out the sub menu items
-          add_submenu_page($menu_slug, ucfirst($subm_item), ucwords($subm_item),$capability, $subm_slug, array( $this, 'menu_callback' )  );
+          add_submenu_page(
+            $menu_slug,
+            ucfirst($subm_item),
+            ucwords($subm_item),
+            $capability,
+            $subm_slug,
+            array( $this, 'menu_callback' )
+          );
         }
 
         /**

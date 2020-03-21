@@ -5,10 +5,10 @@
  */
 if ( isset( $_POST['submit'] ) ){
 
-	$processing = true;
+	$siform->processing = true;
 
 	if ( ! $siform->verify_nonce()  ) {
-		wp_die('Verification Failed !!!');
+		wp_die($siform->user_feedback('error','Verification Failed !!!'));
 	}
 
 	// get the lcg_value
@@ -19,12 +19,11 @@ if ( isset( $_POST['submit'] ) ){
 
 	// numbers only
 	if ( ! is_numeric($slockdown) ) {
-		wp_die();
+		wp_die($siform->user_feedback('error','you need to choose something'));
 	}
 
 	// update the lockdown status
 	update_option('mlockdown_status', $slockdown);
-
 
 }
 ?><div class"lockdown-status">
@@ -39,6 +38,7 @@ if ( isset( $_POST['submit'] ) ){
 </div>
 <hr/>
 <div id="frmwrap" >
+<?php if ( ! $siform->processing ): ?>
 		<form action="" method="POST"	enctype="multipart/form-data"><?php
 	    // open table
 	    echo $siform->table('open');
@@ -57,4 +57,10 @@ if ( isset( $_POST['submit'] ) ){
 	    echo get_submit_button('Save', 'button-primary button-hero ');
 
 	?></form>
+<?php endif;
+
+if ($siform->processing) {
+	echo '<a class="browser button button-hero" href="'.admin_url('/admin.php?page=membeship-lockdown').'">Back</a>';
+}
+?>
 </div><!--frmwrap-->
