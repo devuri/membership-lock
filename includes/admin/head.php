@@ -6,7 +6,7 @@
     /**
      * run any additional PHP stuff here
      */
-    Sim_Admin_Menu::admin_header();
+    Si_Admin_Menu::admin_header();
 
 ?><head>
 <meta charset="UTF-8">

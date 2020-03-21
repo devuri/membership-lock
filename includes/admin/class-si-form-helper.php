@@ -1,13 +1,13 @@
 <?php
 
-namespace simForm;
+namespace Switchwebdev\Admin\Si_Form;
 
 /**
- * Sim_Form_Helper
+ * Si_Form_Helper
  *
  * form helper class
  */
-final class Sim_Form_Helper
+final class Si_Form_Helper
 {
 
   /**
@@ -72,18 +72,11 @@ final class Sim_Form_Helper
       'sort_column' => 'post_date',
       'sort_order' => 'desc'
     );
+    // get the pages
     $pages = get_pages($arg);
-    $selectpages = array();
+    $page_list = array();
     foreach ($pages as $pkey => $page) {
-      $selectpages[$pkey] = array(
-        $page->ID => $page->post_title,
-      );
-    }
-    // breakdown to key.value pairs
-    foreach ($selectpages as $wpkey => $wpages) {
-      foreach ($wpages as $vkey => $val) {
-        $page_list[$vkey] = $val;
-      }
+      $page_list[$page->ID] = $page->post_title;
     }
     return $page_list;
   }
@@ -96,7 +89,7 @@ final class Sim_Form_Helper
   public function select($options = array(),$fieldname = 'name',$required = false){
     // set reuired
     $require = $this->require($required);
-    $defualt_select = 'Select a page';
+    $defualt_select = 'Select an option';
 
     // lets build out the select field
     $select  = '';
@@ -121,7 +114,7 @@ final class Sim_Form_Helper
     }
     $select .= '</select>';
     $select .= '<p class="description" id="'.str_replace(" ", "-", $fieldname).'-description">';
-    $select .= 'Enter '.strtolower(str_replace("_", " ", $fieldname));
+    $select .= strtolower(str_replace("_", " ", $fieldname));
     $select .= '<strong>.</strong>';
     $select .= '</p>';
     $select .= '</td>';
@@ -155,7 +148,7 @@ final class Sim_Form_Helper
     $textarea .= '<textarea class="uk-textarea" name="'.str_replace(" ", "_", $fieldname).'_textarea" rows="8" cols="50">';
     $textarea .= '</textarea>';
     $textarea .= '<p class="description" id="'.str_replace(" ", "-", $fieldname).'-description">';
-    $textarea .= 'Enter '.strtolower(str_replace("_", " ", $fieldname));
+    $textarea .= strtolower(str_replace("_", " ", $fieldname));
     $textarea .= '<strong>.</strong>';
     $textarea .= '</p>';
     $textarea .= '</td>';
@@ -262,7 +255,9 @@ final class Sim_Form_Helper
    */
   public function verify_nonce($noncefield='_swa_page_wpnonce'){
     /**
-     * Lets verify the @return boolean
+     * Lets verify this
+     *
+     * @return boolean
      */
     if ( ! isset( $_POST[$noncefield] ) || ! wp_verify_nonce( $_POST[$noncefield] )) {
       return false;

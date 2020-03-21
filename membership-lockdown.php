@@ -10,7 +10,7 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: sw-membership-lockdown
  *
- * Requires PHP: 5.4+
+ * Requires PHP: 5.6+
  * Tested up to PHP: 7.0
  *
  * Copyright 2020 Uriel Wilson, support@switchwebdev.com
@@ -54,13 +54,14 @@
  *
  * @since 1.0
  */
-final class swMember_Lockdown {
+final class Si_Member_Lockdown {
 
   public function __construct() {
     if ($this->lockdown()) {
       add_action( 'init', array( $this, 'membershiplock'), 99 );
     }
   }
+
   /**
    * Redirect to the Login Page
    *
@@ -89,26 +90,20 @@ final class swMember_Lockdown {
   }
 }
 #  ----------------------------------------------------------------------------
-New swMember_Lockdown();
+New Si_Member_Lockdown();
 
-  /**
-   * Setup the menu builder class
-   *
-   */
-  if (!class_exists('Sim_Admin_Menu')) {
-    include plugin_dir_path( __FILE__ ). 'includes/admin/class-sim-admin-menu.php';
+  // Setup the menu builder class
+  if (!class_exists('Si_Admin_Menu')) {
+    require_once plugin_dir_path( __FILE__ ). 'includes/admin/class-si-admin-menu.php';
    }
 
-   /**
-    * Form Class
-    *
-    */
-   if (!class_exists('Sim_Form_Helper')) {
-     include plugin_dir_path( __FILE__ ). 'includes/admin/class-sim-form-helper.php';
+  // php version check
+  Si_Admin_Menu::compare_php_version();
+
+   // Form Class
+   if (!class_exists('Si_Form_Helper')) {
+     require_once plugin_dir_path( __FILE__ ). 'includes/admin/class-si-form-helper.php';
     }
 
-  /**
-   * Menu Item
-   *
-   */
-  include plugin_dir_path( __FILE__ ). 'includes/admin/menu/lockdown.php';
+  // Menu Item
+  require_once plugin_dir_path( __FILE__ ). 'includes/admin/menu/lockdown.php';

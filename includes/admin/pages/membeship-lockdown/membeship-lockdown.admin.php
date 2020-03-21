@@ -1,9 +1,11 @@
 <?php
 /**
  * Process the data
- * @var [type]
+ *
  */
 if ( isset( $_POST['submit'] ) ){
+
+	$processing = true;
 
 	if ( ! $siform->verify_nonce()  ) {
 		wp_die('Verification Failed !!!');
@@ -11,25 +13,28 @@ if ( isset( $_POST['submit'] ) ){
 
 	echo $siform->input_val('redirect_after_login');
 
-
 }
 ?><div id="frmwrap" >
 		<form action="" method="POST"	enctype="multipart/form-data"><?php
-	        // open table
-	        echo $siform->table('open');
+	    // open table
+	    echo $siform->table('open');
 
-					// Select
-					$pages = $siform->page_list();
-					echo $siform->select($pages,'Redirect After Login',true);
+			// Turn On Lockdown
+			$lockdown = array('Off','On');
+			echo $siform->select($lockdown,'Turn On Lockdown');
 
-	        // close table
-	        echo $siform->table('close');
+			// Redirect
+			$pages = $siform->page_list();
+			echo $siform->select($pages,'Redirect After Login');
 
-	        // wp_nonce_field
-	        $siform->nonce();
+	    // close table
+	    echo $siform->table('close');
 
-	        // submit button
-	        echo get_submit_button('Add Video', 'button-primary button-hero ');
+	    // nonce_field
+	    $siform->nonce();
 
-	      ?></form>
-	    </div><!--frmwrap-->
+	    // submit button
+	    echo get_submit_button('Save', 'button-primary button-hero ');
+
+	?></form>
+</div><!--frmwrap-->

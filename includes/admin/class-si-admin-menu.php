@@ -2,8 +2,8 @@
 /**
  * ----------------------------------------------------------------------------
  * @copyright 	Copyright © 2020 Uriel Wilson.
- * @package   	Sim_Admin_Menu
- * @version   	2.3.0
+ * @package   	Si_Admin_Menu
+ * @version   	2.5.0
  * @license   	GPL-2.0+
  * @author    	Uriel Wilson
  * @link      	https://switchwebdev.com
@@ -14,14 +14,19 @@
  * put in /includes/admin/class-sim-admin-menu.php
  * new up in /includes/admin/menu/my-new-custom-menu.php
  *
- * new Sim_Admin_Menu($my_new_menu);
+ * new Si_Admin_Menu($my_new_menu);
  *
  * ----------------------------------------------------------------------------
  */
 
-use simForm\Sim_Form_Helper as siForms;
+use Switchwebdev\Admin\Si_Form\Si_Form_Helper as Si_Form;
 
-final class Sim_Admin_Menu {
+final class Si_Admin_Menu {
+
+    /**
+     * class version
+     */
+    const SI_ADMIN_VERSION = '2.5.0';
 
     /**
      * $menu_args
@@ -79,9 +84,6 @@ final class Sim_Admin_Menu {
       // Admin Only Settings Menu
       $this->settings_args = $admin_only;
 
-      //form helper
-      //$swquickpost = new siForms;
-
       // ok lets create the menu
       add_action( 'admin_menu',array( $this, 'build_menu' ) );
 
@@ -93,14 +95,33 @@ final class Sim_Admin_Menu {
     }
 
     /**
+     * Compare PHP Version
+     *
+     * Chect to see if the PHP_VERSION matches the required version
+     * for this plugin to work if not wp error with explanation "Minimum PHP Version 5.6 required"
+     *
+     * @param  string $min_version this is our min required version.
+     * @return boolean if false then wp error
+     */
+    public static function compare_php_version($min_version = '5.6'){
+      if (version_compare(PHP_VERSION, $min_version) >= 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    /**
      * Styles on header action
      *
-     * Simple CSS with uikit styles for the admin pages
+     * Simple CSS Styles
+     * Also using uikit styles
+     *
      * @link https://getuikit.com/docs/introduction
      * @link https://github.com/uikit/uikit
      */
     public function admin_page_styles() {
-      wp_enqueue_style( 'swa-style', plugin_dir_url( __FILE__ ) . 'css/swa-styles.css', array(), '2.0', 'all' );
+      wp_enqueue_style( 'swa-style', plugin_dir_url( __FILE__ ) . 'css/swa-styles.css', array(), self::SI_ADMIN_VERSION, 'all' );
     }
 
     /**
@@ -206,10 +227,10 @@ final class Sim_Admin_Menu {
     public function autoload_admin_page($admin_page) {
 
       if ($this->admin_smenu) {
-        //$swquickpost = new siForms;
+        //
         $admin_file = plugin_dir_path( __FILE__ ). 'pages/admin-options/'.$admin_page.'.admin.php';
       } else {
-        $siform = new siForms;
+        $siform = new Si_Form();
         $admin_file = plugin_dir_path( __FILE__ ). 'pages/'.$this->menu_args[3].'/'.$admin_page.'.admin.php';
       }
 
@@ -285,7 +306,7 @@ final class Sim_Admin_Menu {
          */
         $menu_name = sanitize_title($menu_name);
         if ( file_exists( plugin_dir_path( __FILE__ ). 'menu/'.$menu_name.'.php' ) ) {
-          include plugin_dir_path( __FILE__ ). 'menu/'.$menu_name.'.php';
+          require_once plugin_dir_path( __FILE__ ). 'menu/'.$menu_name.'.php';
         } else {
           $debug['make_menu_error'] = plugin_dir_path( __FILE__ ). 'menu/'.$menu_name.'.php';
         }

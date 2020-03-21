@@ -1,17 +1,16 @@
 <?php
 
-
-# Main Menu
+# Lockdown Menu
 $swlockdown_menu = array(
-  'Membership Lockdown',
+  'Membership Lockdown Settings',
   'Lockdown',
   'manage_options',
   'membeship-lockdown',
   'memlockdown_callback',
   '4.6',
   'dashicons-lock',
-  'swaml',
+  'mls',
 );
 
 // initialize menu
-new Sim_Admin_Menu($swlockdown_menu);
+new Si_Admin_Menu($swlockdown_menu);
