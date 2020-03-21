@@ -16,8 +16,8 @@
 </head>
 <header class="sw-header">
 </header>
-<div class="swa-container">
-  <div class="swa-wrap"><?php
+<div class="si-container">
+  <div class="si-admin-wrap"><?php
 
           if (!$this->admin_smenu) {
 
@@ -37,7 +37,7 @@
             }
 
 
-         ?><div class="swa-child">
-            <div class="swa-grid-item">
-                <div class="swa-padding">
+         ?><div class="si-child">
+            <div class="si-grid-item">
+                <div class="si-padding">
                     <p><!---innner paragraph -->

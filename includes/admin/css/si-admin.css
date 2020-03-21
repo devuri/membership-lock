@@ -1,0 +1,71 @@
+.si-admin-wrap {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 60px;
+	font-size: initial;
+	line-height: 2em;
+}
+.si-admin-wrap select{
+  font-size: initial;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.si-admin-wrap p {
+  font-size: inherit;
+  line-height: 1.5;
+  margin: 1em 0;
+}
+
+.sw-header {
+  box-shadow: 0 5px 15px rgba(0,0,0,.08);
+/* box-shadow: 0 1px 3px rgba(0,0,0,0.2);*/
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  position: fixed;
+  z-index: 10;
+  margin-left: -20px;
+  margin-bottom: 20px;
+}
+
+.si-admin-wrap a {
+  text-decoration: none;
+}
+
+.si-admin-tab .nav-tab {
+  padding-right: 15px;
+  padding-left: 15px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.si-admin-dashicons-before:before {
+  font-family: dashicons;
+  display: inline-block;
+  line-height: unset;
+  padding: 0px 12px;
+  font-weight: 400;
+  font-style: normal;
+  speak: none;
+  text-decoration: inherit;
+  text-transform: none;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: auto;
+  height: auto;
+  font-size: 40px;
+  vertical-align: middle;
+  text-align: center;
+  transition: color .1s ease-in;
+  color: #555555;
+  border: 0;
+  border-top: 2px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: 2px solid #fafafa;
+  border-right: 1px solid #fafafa;
+  border-radius: 8px;
+  margin-right: 8px;
+  margin-left: 9px;
+}

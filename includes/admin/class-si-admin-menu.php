@@ -26,7 +26,7 @@ final class Si_Admin_Menu {
     /**
      * class version
      */
-    const SI_ADMIN_VERSION = '2.5.0';
+    const SI_ADMIN_VERSION = '2.8.3';
 
     /**
      * $menu_args
@@ -35,7 +35,6 @@ final class Si_Admin_Menu {
      * @link https://developer.wordpress.org/reference/functions/add_menu_page/
      */
     private $menu_args;
-
 
     /**
      * $submenu_args
@@ -88,7 +87,7 @@ final class Si_Admin_Menu {
       add_action( 'admin_menu',array( $this, 'build_menu' ) );
 
       // styles_admin
-      add_action( 'swa_head',array( $this, 'admin_page_styles' ) );
+      add_action( 'admin_enqueue_scripts',array( $this, 'admin_page_styles') );
 
       // footer_separator
       add_action( 'swa_footer',array( $this, 'footer_separator' ) );
@@ -121,7 +120,7 @@ final class Si_Admin_Menu {
      * @link https://github.com/uikit/uikit
      */
     public function admin_page_styles() {
-      wp_enqueue_style( 'swa-style', plugin_dir_url( __FILE__ ) . 'css/swa-styles.css', array(), self::SI_ADMIN_VERSION, 'all' );
+        wp_enqueue_style( 'si-admin-style', plugin_dir_url( __FILE__ ) . 'css/si-admin.css', array(), self::SI_ADMIN_VERSION, 'all' );
     }
 
     /**
@@ -198,7 +197,7 @@ final class Si_Admin_Menu {
      */
     public function dynamic_tab_menu() {
 
-      echo '<h2 class="nav-tab-wrapper wp-clearfix">';
+      echo '<h2 class="si-admin nav-tab-wrapper wp-clearfix">';
       foreach ($this->submenu_args as $key => $subm_item) {
          #slugs
         if ($key == 0) {
@@ -209,9 +208,9 @@ final class Si_Admin_Menu {
 
           // build out the sub menu items
           if ($subm_slug == $this->get_thepage_name()) {
-            echo '<a href="'.admin_url('/admin.php?page='.strtolower($subm_slug).'').'" class="nav-tab nav-tab-active">'.ucwords($subm_item).'</a>';
+            echo '<a href="'.admin_url('/admin.php?page='.strtolower($subm_slug).'').'" class="si-admin-tab nav-tab nav-tab-active">'.ucwords($subm_item).'</a>';
           } else {
-            echo '<a href="'.admin_url('/admin.php?page='.strtolower($subm_slug).'').'" class="nav-tab nav-tab">'.ucwords($subm_item).'</a>';
+            echo '<a href="'.admin_url('/admin.php?page='.strtolower($subm_slug).'').'" class="si-admin-tab nav-tab nav-tab">'.ucwords($subm_item).'</a>';
           }
         }
       echo '</h2>';
@@ -265,6 +264,7 @@ final class Si_Admin_Menu {
     public function admin_page($page_name = 'admin') {
 
       $page_title = ucfirst($this->get_thepage_name());
+
       require_once plugin_dir_path( __FILE__ ). 'head.php';
       $this->autoload_admin_page($page_name);
       require_once plugin_dir_path( __FILE__ ). 'footer.php';
@@ -320,7 +320,7 @@ final class Si_Admin_Menu {
      * @since 1.0
      */
     public function get_menu_title(){
-      $menu_title = '<h2 class="swa-dashicons-before ';
+      $menu_title = '<h2 class="si-admin-dashicons-before ';
       $menu_title .= $this->menu_args[6];
       $menu_title .= '">';
       $menu_title .= $this->menu_args[0];

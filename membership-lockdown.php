@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: Membership Lockdown
+ * Plugin Name: Membership Lock
  * Plugin URI:  https://switchwebdev.com/wordpress-plugins/
- * Description: Lockout everyone only registered website users will be able to access, If a user is not logged in we will redirect them to the login page.
+ * Description: Membership Lock down lets you easily lock all post content including attached images, video, docs, and everything else.
  * Author:      SwitchWebdev.com
  * Author URI:  https://switchwebdev.com
- * Version:     1.3.0
+ * Version:     1.7.0
  * License:     GPLv2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: sw-membership-lockdown
@@ -39,7 +39,7 @@
     }
 
   # plugin directory
-	  define("SWMLD_VERSION", '1.3.0');
+	  define("SWMLD_VERSION", '1.7.0');
 
   # plugin directory
     define("SWMLD_DIR", dirname(__FILE__));
@@ -47,6 +47,15 @@
   # plugin url
     define("SWMLD_URL", plugins_url( "/",__FILE__ ));
 #  -----------------------------------------------------------------------------
+
+//Activate
+register_activation_hook( __FILE__, 'membershiplockdown_activation' );
+function membershiplockdown_activation() {
+
+  // add option
+  $lockdown_status = 1;
+  update_option('mlockdown_status', $lockdown_status);
+}
 /**
  *  Main Class
  *
@@ -57,9 +66,18 @@
 final class Si_Member_Lockdown {
 
   public function __construct() {
-    if ($this->lockdown()) {
-      add_action( 'init', array( $this, 'membershiplock'), 99 );
+    if (self::lockdown()) {
+      add_action( 'init', array( $this, 'membershiplock'), 10 );
     }
+    add_action( 'admin_enqueue_scripts', array( $this, 'si_lockdown_styles'), 10 );
+  }
+
+  /**
+   * si_lockdown_styles
+   * @return
+   */
+  public function si_lockdown_styles() {
+      wp_enqueue_style( 'lockdown-style', plugin_dir_url( __FILE__ ) . 'includes/admin/css/slockdown.css', array(), '2.9.2', 'all' );
   }
 
   /**
@@ -84,21 +102,30 @@ final class Si_Member_Lockdown {
    * get the lockdown status
    * @return boolean
    */
-  public function lockdown(){
+  public static function lockdown(){
     $lockdown = get_option( 'mlockdown_status' );
     return $lockdown;
   }
+
+  /**
+   * Get the Lockdown status ON/OFF
+   * @return string
+   */
+  public static function status(){
+    if (self::lockdown()) {
+      return '<h4 class="lockdown status-on">enabled</h4>';
+    } else {
+      return '<h4 class="lockdown status-off">disabled</h4>';
+    }
+  }
 }
 #  ----------------------------------------------------------------------------
-New Si_Member_Lockdown();
+  New Si_Member_Lockdown();
 
   // Setup the menu builder class
   if (!class_exists('Si_Admin_Menu')) {
     require_once plugin_dir_path( __FILE__ ). 'includes/admin/class-si-admin-menu.php';
    }
-
-  // php version check
-  Si_Admin_Menu::compare_php_version();
 
    // Form Class
    if (!class_exists('Si_Form_Helper')) {
