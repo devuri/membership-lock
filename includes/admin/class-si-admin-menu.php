@@ -3,7 +3,7 @@
  * ----------------------------------------------------------------------------
  * @copyright 	Copyright © 2020 Uriel Wilson.
  * @package   	Si_Admin_Menu
- * @version   	2.5.0
+ * @version   	3.1.2
  * @license   	GPL-2.0+
  * @author    	Uriel Wilson
  * @link      	https://switchwebdev.com
@@ -26,7 +26,7 @@ final class Si_Admin_Menu {
     /**
      * class version
      */
-    const SI_ADMIN_VERSION = '3.1.0';
+    const SI_ADMIN_VERSION = '3.1.2';
 
     /**
      * $menu_args
@@ -108,6 +108,14 @@ final class Si_Admin_Menu {
       } else {
         return false;
       }
+    }
+
+    /**
+     * get the instance
+     * @return object
+     */
+    public function instance(){
+      return new self($this->menu_args,$this->submenu_args,$this->settings_args);
     }
 
     /**
