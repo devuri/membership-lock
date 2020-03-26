@@ -249,8 +249,8 @@ final class Si_Form_Helper
    * @return string
    */
   public function input_val($input_field=null){
-    $input = $_POST[$input_field];
-    if ( isset( $_POST[$input_field] )) {
+    $input = sanitize_text_field($_POST[$input_field]);
+    if ( isset( $input )) {
       return $input;
     }
   }
