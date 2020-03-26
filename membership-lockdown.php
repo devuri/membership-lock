@@ -5,7 +5,7 @@
  * Description: Membership Lock down lets you easily lock all post content including attached images, video, docs, and everything else.
  * Author:      SwitchWebdev.com
  * Author URI:  https://switchwebdev.com
- * Version:     1.7.2
+ * Version:     1.7.3
  * License:     GPLv2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: sw-membership-lockdown
