@@ -53,7 +53,7 @@ register_activation_hook( __FILE__, 'membershiplockdown_activation' );
 function membershiplockdown_activation() {
 
   // add option
-  $lockdown_status = 1;
+  $lockdown_status = 0;
   update_option('mlockdown_status', $lockdown_status);
 }
 /**
