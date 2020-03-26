@@ -10,8 +10,6 @@
 
 ?><head>
 <meta charset="UTF-8">
-<!-- Styles -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.3.1/dist/css/uikit.min.css" />
 
 </head>
 <header class="sw-header">
