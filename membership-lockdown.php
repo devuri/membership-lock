@@ -77,7 +77,7 @@ final class Si_Member_Lockdown {
    * @return
    */
   public function si_lockdown_styles() {
-      wp_enqueue_style( 'lockdown-style', plugin_dir_url( __FILE__ ) . 'includes/admin/css/slockdown.css', array(), '2.9.2', 'all' );
+      wp_enqueue_style( 'lockdown-style', plugin_dir_url( __FILE__ ) . 'includes/admin/css/slockdown.css', array(), SWMLD_VERSION, 'all' );
   }
 
   /**

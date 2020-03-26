@@ -112,9 +112,9 @@ final class Si_Admin_Menu {
 
     /**
      * get the instance
-     * @return object
+     * @return object get the current object instance 
      */
-    public function instance(){
+    public function si_admin_menu(){
       return new self($this->menu_args,$this->submenu_args,$this->settings_args);
     }
 
