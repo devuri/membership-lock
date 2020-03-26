@@ -112,9 +112,9 @@ final class Si_Admin_Menu {
 
     /**
      * get the instance
-     * @return object get the current object instance 
+     * @return object
      */
-    public function si_admin_menu(){
+    public function instance(){
       return new self($this->menu_args,$this->submenu_args,$this->settings_args);
     }
 
@@ -129,6 +129,7 @@ final class Si_Admin_Menu {
      */
     public function admin_page_styles() {
         wp_enqueue_style( 'si-admin-style', plugin_dir_url( __FILE__ ) . 'css/si-admin.css', array(), self::SI_ADMIN_VERSION, 'all' );
+        wp_enqueue_style( 'si-uikit-style', plugin_dir_url( __FILE__ ) . 'css/uikit/uikit.css', array(), self::SI_ADMIN_VERSION, 'all' );
     }
 
     /**
