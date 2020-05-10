@@ -3,7 +3,7 @@
  * ----------------------------------------------------------------------------
  * @copyright 	Copyright © 2020 Uriel Wilson.
  * @package   	Si_Admin_Menu
- * @version   	3.1.2
+ * @version   	3.1.4
  * @license   	GPL-2.0+
  * @author    	Uriel Wilson
  * @link      	https://switchwebdev.com
@@ -26,7 +26,7 @@ final class Si_Admin_Menu {
     /**
      * class version
      */
-    const SI_ADMIN_VERSION = '3.1.2';
+    const SI_ADMIN_VERSION = '3.1.4';
 
     /**
      * $menu_args
@@ -122,14 +122,9 @@ final class Si_Admin_Menu {
      * Styles on header action
      *
      * Simple CSS Styles
-     * Also using uikit styles
-     *
-     * @link https://getuikit.com/docs/introduction
-     * @link https://github.com/uikit/uikit
      */
     public function admin_page_styles() {
         wp_enqueue_style( 'si-admin-style', plugin_dir_url( __FILE__ ) . 'css/si-admin.css', array(), self::SI_ADMIN_VERSION, 'all' );
-        wp_enqueue_style( 'si-uikit-style', plugin_dir_url( __FILE__ ) . 'css/uikit/uikit.css', array(), self::SI_ADMIN_VERSION, 'all' );
     }
 
     /**
@@ -166,7 +161,7 @@ final class Si_Admin_Menu {
      *
      * @since 1.0
      */
-    public static function menu_callback() {
+    public function menu_callback() {
       # get page name
       $mpage = $this->get_thepage_name();
       $this->admin_page($mpage);
