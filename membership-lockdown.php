@@ -5,13 +5,13 @@
  * Description: Membership Lock down lets you easily lock all post content including attached images, video, docs, and everything else.
  * Author:      SwitchWebdev.com
  * Author URI:  https://switchwebdev.com
- * Version:     1.7.3
+ * Version:     1.7.6
  * License:     GPLv2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: sw-membership-lockdown
  *
  * Requires PHP: 5.6+
- * Tested up to PHP: 7.0
+ * Tested up to PHP: 7.3
  *
  * Copyright 2020 Uriel Wilson, support@switchwebdev.com
  * License: GNU General Public License
@@ -39,7 +39,7 @@
     }
 
   # plugin directory
-	  define("SWMLD_VERSION", '1.7.2');
+	  define("SWMLD_VERSION", '1.7.6');
 
   # plugin directory
     define("SWMLD_DIR", dirname(__FILE__));

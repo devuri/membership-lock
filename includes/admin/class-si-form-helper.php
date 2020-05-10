@@ -7,8 +7,7 @@ namespace Switchwebdev\Admin\Si_Form;
  *
  * form helper class
  */
-final class Si_Form_Helper
-{
+final class Si_Form_Helper {
   public $processing = false;
 
   /**
@@ -39,7 +38,7 @@ final class Si_Form_Helper
    * @param  boolean $required
    * @return
    */
-  public function require($required = false){
+  public function is_required($required = false){
     if ($required) {
       $require = ' <span class="description">(required)</span>';
     } else {
@@ -59,7 +58,7 @@ final class Si_Form_Helper
   public function input($fieldname='name',$required = false,$type='text'){
     $fieldname = strtolower($fieldname);
     // set reuired
-    $require = $this->require($required);
+    $require = $this->is_required($required);
 
     // lets build out the input
     $input  = '<!-- input field '.$fieldname.'_input -->';
@@ -109,7 +108,7 @@ final class Si_Form_Helper
    */
   public function select($options = array(),$fieldname = 'name',$required = false){
     // set reuired
-    $require = $this->require($required);
+    $require = $this->is_required($required);
     $defualt_select = '<option selected="selected">Select an option</option>';
 
     // lets build out the select field
@@ -153,7 +152,7 @@ final class Si_Form_Helper
   public function textarea($fieldname='name',$required = false){
     $fieldname = strtolower($fieldname);
     // set reuired
-    $require = $this->require($required);
+    $require = $this->is_required($required);
 
     // lets build out the textarea
     $textarea  = '<!-- '.$fieldname.'_textarea -->';
@@ -186,7 +185,7 @@ final class Si_Form_Helper
    * @link https://developer.wordpress.org/reference/functions/wp_dropdown_categories/
    */
   public function categorylist($fieldname=null,$args = array()){
-    $require = $this->require($required);
+    $require = $this->is_required($required);
 
     $catlist_args = array(
       'show_option_all'    => '',
