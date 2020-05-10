@@ -5,7 +5,7 @@
  * Description: Membership Lock down lets you easily lock all post content including attached images, video, docs, and everything else.
  * Author:      SwitchWebdev.com
  * Author URI:  https://switchwebdev.com
- * Version:     1.7.6
+ * Version:     2.0.1
  * License:     GPLv2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: sw-membership-lockdown
@@ -113,24 +113,34 @@ final class Si_Member_Lockdown {
    */
   public static function status(){
     if (self::lockdown()) {
-      return '<h4 class="lockdown status-on">enabled</h4>';
+      return 'Status: <span style="
+        text-align: center;
+        border: solid 2px #02af07;
+        color: #02af07;
+        width: 100px;
+        font-weight: 600;
+        text-transform: capitalize;
+        padding-left: 8px;
+        padding-right: 8px;" class="lockdown status-on">enabled</span>';
     } else {
-      return '<h4 class="lockdown status-off">disabled</h4>';
+      return 'Status: <span style="
+        text-align: center;
+        border: solid 2px #af0202;
+        color: #af0202;
+        width: 100px;
+        font-weight: 600;
+        text-transform: capitalize;
+        padding-left: 8px;
+        padding-right: 8px;" class="lockdown status-on">disabled</span>';
     }
   }
 }
 #  ----------------------------------------------------------------------------
   New Si_Member_Lockdown();
 
-  // Setup the menu builder class
-  if (!class_exists('Si_Admin_Menu')) {
-    require_once plugin_dir_path( __FILE__ ). 'includes/admin/class-si-admin-menu.php';
-   }
 
-   // Form Class
-   if (!class_exists('Si_Form_Helper')) {
-     require_once plugin_dir_path( __FILE__ ). 'includes/admin/class-si-form-helper.php';
-    }
+    require_once SWMLD_DIR . '/vendor/wp-admin-page/AdminPage.php';
+    require_once SWMLD_DIR . '/vendor/wp-admin-page/Form/FormHelper.php';
 
   // Menu Item
-  require_once plugin_dir_path( __FILE__ ). 'includes/admin/menu/lockdown.php';
+  require_once plugin_dir_path( __FILE__ ). 'src/Admin/MembershipLockAdmin.php';
