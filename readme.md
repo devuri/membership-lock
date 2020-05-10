@@ -20,12 +20,6 @@ If a user is not logged in we will redirect them to the login page.
 2. Activate the plugin through the \'Plugins\' menu in WordPress.
 
 
-## Frequently Asked Questions 
-
-Will this work with custom Post Types
-
-Yes, Membership Lock down will lock all post types, posts and pages, only website members will be able to view.
-
 ## Where can I find the Admin Settings =
 
 After you install and activate the plugin, you will see a new menu item in the admin section "Lockdown" this will allow you to turn on and off Membership Lock down.
