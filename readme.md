@@ -16,15 +16,13 @@ If a user is not logged in we will redirect them to the login page.
 
 ## Installation
 
-This section describes how to install the plugin and get it working.
-
 1. Upload Membership Lock to the /wp-content/plugins/ directory.
 2. Activate the plugin through the \'Plugins\' menu in WordPress.
 
 
 ## Frequently Asked Questions 
 
- Will this work with custom Post Types
+Will this work with custom Post Types
 
 Yes, Membership Lock down will lock all post types, posts and pages, only website members will be able to view.
 
