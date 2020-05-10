@@ -1,3 +1,5 @@
+> **Note:** This is the development version and contains features that may be in various stages of development. If you want to use this on a live website download here: [Membership Lock](https://wordpress.org/plugins/membership-lock/).
+
 ## Membership Lock 
 
 Membership Lock down lets you easily lock all post content including attached images, video, docs, and everything else.
