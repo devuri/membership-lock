@@ -140,7 +140,6 @@ final class Si_Member_Lockdown {
 
 
     require_once SWMLD_DIR . '/vendor/wp-admin-page/AdminPage.php';
-    require_once SWMLD_DIR . '/vendor/wp-admin-page/Form/FormHelper.php';
 
   // Menu Item
   require_once plugin_dir_path( __FILE__ ). 'src/Admin/MembershipLockAdmin.php';
