@@ -11,7 +11,7 @@ final class MembershipLockAdmin extends AdminPage {
    */
   private static function admin_menu(){
     $menu = array();
-    $menu[] = 'Membership Lockdown Settings';
+    $menu[] = 'Membership Lockdown';
     $menu[] = 'Lockdown';
     $menu[] = 'manage_options';
     $menu[] = 'membeship-lockdown';
