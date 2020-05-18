@@ -5,7 +5,7 @@
  * Description: Membership Lock down lets you easily lock all post content including attached images, video, docs, and everything else.
  * Author:      SwitchWebdev.com
  * Author URI:  https://switchwebdev.com
- * Version:     2.1.0
+ * Version:     2.1.4
  * License:     GPLv2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: sw-membership-lockdown
@@ -39,7 +39,7 @@
     }
 
   # plugin directory
-	  define("SWMLD_VERSION", '2.1.0');
+	  define("SWMLD_VERSION", '2.1.4');
 
   # plugin directory
     define("SWMLD_DIR", dirname(__FILE__));
@@ -132,6 +132,18 @@ final class Si_Member_Lockdown {
         text-transform: capitalize;
         padding-left: 8px;
         padding-right: 8px;" class="lockdown status-on">disabled</span>';
+    }
+  }
+
+  public static function lock_button(){
+    if (self::lockdown()) {
+      $button = '<input type="hidden" id="membership_lockdown" name="membership_lockdown" value="0">';
+      $button .= get_submit_button('Deactivate', 'browser button-hero');
+      return $button;
+    } else {
+      $button = '<input type="hidden" id="membership_lockdown" name="membership_lockdown" value="1">';
+      $button .= get_submit_button('Activate', 'button-primary button-hero');
+      return $button;
     }
   }
 }
