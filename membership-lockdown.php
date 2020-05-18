@@ -134,6 +134,18 @@ final class Si_Member_Lockdown {
         padding-right: 8px;" class="lockdown status-on">disabled</span>';
     }
   }
+
+  public static function lock_button(){
+    if (self::lockdown()) {
+      $button = '<input type="hidden" id="membership_lockdown" name="membership_lockdown" value="0">';
+      $button .= get_submit_button('Deactivate', 'browser button-hero');
+      return $button;
+    } else {
+      $button = '<input type="hidden" id="membership_lockdown" name="membership_lockdown" value="1">';
+      $button .= get_submit_button('Activate', 'button-primary button-hero');
+      return $button;
+    }
+  }
 }
 #  ----------------------------------------------------------------------------
   New Si_Member_Lockdown();
