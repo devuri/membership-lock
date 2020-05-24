@@ -1,28 +1,19 @@
 <?php
 
 namespace WPAdminPage;
-use WPAdminPage\Admin\Form\FormHelper as Form;
-
-/**
- * ----------------------------------------------------------------------------
- * @copyright 	Copyright © 2020 Uriel Wilson.
- * @package   	AdminPage
- * @version   	4.0.1
- * @license   	GPL-2.0+
- * @author    	Uriel Wilson
- * @link      	https://github.com/devuri/wp-admin-page/
- *
- * ----------------------------------------------------------------------------
- */
-
-  if (!defined('ABSPATH')) exit;
-
+use WPAdminPage\FormHelper as Form;
 
   /**
-   * Load the FormHelper class
-   * @var object
+   * --------------------------------------------------------------------------
+   * @copyright 	Copyright © 2020 Uriel Wilson.
+   * @package   	AdminPage
+   * @version   	1.1.5
+   * @license   	GPL-2.0
+   * @author    	Uriel Wilson
+   * @link      	https://github.com/devuri/wp-admin-page/
+   * --------------------------------------------------------------------------
    */
-  require_once plugin_dir_path( __FILE__ ) . 'Form/FormHelper.php';
+  if (!defined('ABSPATH')) exit;
 
 
 if (!class_exists('WPAdminPage\AdminPage')) {
@@ -31,7 +22,7 @@ if (!class_exists('WPAdminPage\AdminPage')) {
     /**
      * class version
      */
-    const ADMINVERSION = '4.0.1';
+    const ADMINVERSION = '1.1.5';
 
     /**
      * get the current plugin dir path
@@ -40,11 +31,6 @@ if (!class_exists('WPAdminPage\AdminPage')) {
      */
     private $plugin_path;
 
-    /**
-     * setup php requirement
-     * @var string
-     */
-    private $php_required = '5.6';
 
     /**
      * $page_title
@@ -154,6 +140,12 @@ if (!class_exists('WPAdminPage\AdminPage')) {
     private $mcolor = '#0071A1';
 
     /**
+     * To hide the submenu link from a top level menu
+     * @var boolean
+     */
+    private $display_submenulink = true;
+
+    /**
      * Initialization
      *
      * @param array $main_menu     Main menu
@@ -161,9 +153,11 @@ if (!class_exists('WPAdminPage\AdminPage')) {
      * @param array $admin_only special admin only menu
      * @since 1.0
      */
-
-    function __construct(array $main_menu, array $submenu_items = array(), array $admin_only = array()) {
-
+    public function __construct(
+        array $main_menu,
+        array $submenu_items = array(),
+        array $admin_only = array()
+    ) {
       /**
        * add the color scheme
        * use defualt if not defined
@@ -181,8 +175,10 @@ if (!class_exists('WPAdminPage\AdminPage')) {
       $this->position     = $main_menu[6];
       $this->prefix       = $main_menu[7];
       $this->plugin_path  = $main_menu[8];
-
-      //print_r(count($main_menu));
+      // show submenu link
+      if (isset($main_menu[9])) {
+        $this->display_submenulink  = $main_menu[9];
+      }
 
       // submenu
       $this->submenu_args = $submenu_items;
@@ -190,6 +186,16 @@ if (!class_exists('WPAdminPage\AdminPage')) {
       // Admin Only Settings Menu
       $this->settings_args = $admin_only;
 
+      // actions
+      $this->wp_actions();
+
+    }
+
+    /**
+     * lets load our actions
+     * @return
+     */
+    public function wp_actions(){
       // ok lets create the menu
       add_action( 'admin_menu',array( $this, 'build_menu' ) );
 
@@ -229,21 +235,6 @@ if (!class_exists('WPAdminPage\AdminPage')) {
     }
 
     /**
-     * Compare PHP Version
-     *
-     * Chect to see if the PHP_VERSION matches the required version
-     * for this plugin to work if not wp error with explanation "Minimum PHP Version 5.6 required"
-     * @return boolean if false then wp error
-     */
-    public function compare_php_version(){
-      if (version_compare(PHP_VERSION, $this->php_required) >= 0) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    /**
      * get the instance
      * @return object
      */
@@ -257,6 +248,17 @@ if (!class_exists('WPAdminPage\AdminPage')) {
      */
     public function admin_path(){
       return $this->plugin_path . 'pages/';
+    }
+
+    /**
+     * display submenu link items
+     */
+    private function display_submenu_link(){
+      if ($this->display_submenulink) {
+        return $this->menu_slug;
+      } else {
+        return null;
+      }
     }
 
     /**
@@ -374,11 +376,11 @@ if (!class_exists('WPAdminPage\AdminPage')) {
       if (file_exists($adminfile)) {
         require_once $adminfile;
       } else {
-        $file_location_error = '<h1> Menu file location error : Experiencing Technical Issues, Please Contact Admin </h1>';
+        $file_location_error = '<h1>'. __( 'Menu file location error : Experiencing Technical Issues, Please Contact Admin' ).'</h1>';
           # only show full file path to admin user
         if ( current_user_can('manage_options') ) {
-          $file_location_error  = '<h2> Please check file location, Page Does not Exist</h2>';
-          $file_location_error .= '<span class="alert-danger">'. $adminfile . '</span> location of file was not found </p>';
+          $file_location_error  = '<h2>' .__('Please check file location, Page Does not Exist').' </h2>';
+          $file_location_error .= '<span class="alert-danger">'. $adminfile . '</span> '.__('location of file was not found').' </p>';
         }
           // user feedback
           echo $file_location_error;
@@ -414,6 +416,7 @@ if (!class_exists('WPAdminPage\AdminPage')) {
      * Output for the dynamic tabs
      *
      * @since 1.0
+     * @link https://developer.wordpress.org/reference/functions/__/
      */
     public function tab_menu() {
 
@@ -428,9 +431,9 @@ if (!class_exists('WPAdminPage\AdminPage')) {
 
         // build out the sub menu items
         if ($submenu_slug == $this->page_title()) {
-          echo '<a href="'.admin_url('/admin.php?page='.strtolower($submenu_slug).'').'" style="color:'.$this->mcolor.'" class="wll-admin-tab nav-tab-active">'.ucwords($submenu_item).'</a>';
+          echo '<a href="'.admin_url('/admin.php?page='.strtolower($submenu_slug).'').'" style="color:'.$this->mcolor.'" class="wll-admin-tab nav-tab-active">'.ucwords(__($submenu_item)).'</a>';
         } else {
-          echo '<a href="'.admin_url('/admin.php?page='.strtolower($submenu_slug).'').'" style="color:'.$this->mcolor.'" class="wll-admin-tab">'.ucwords($submenu_item).'</a>';
+          echo '<a href="'.admin_url('/admin.php?page='.strtolower($submenu_slug).'').'" style="color:'.$this->mcolor.'" class="wll-admin-tab">'.ucwords(__($submenu_item)).'</a>';
         }
       }
       echo '</h2>';
@@ -478,7 +481,7 @@ if (!class_exists('WPAdminPage\AdminPage')) {
       $menu_title .= $this->icon_url;
       $menu_title .= '">';
       $menu_title .= '<span class="wll-admin-title">';
-      $menu_title .= $this->page_title;
+      $menu_title .= __($this->page_title);
       $menu_title .= '</span>';
       $menu_title .= '</h2>';
       return $menu_title;
@@ -513,6 +516,7 @@ if (!class_exists('WPAdminPage\AdminPage')) {
        * here we build out the admin menus submenu items
        * for item 0 we will set the same slug as the main item
        * @link https://developer.wordpress.org/reference/functions/add_submenu_page/
+       * @link https://developer.wordpress.org/reference/functions/__/
        */
       foreach ($this->submenu_args as $key => $submenu_item) {
         #slugs
@@ -525,9 +529,10 @@ if (!class_exists('WPAdminPage\AdminPage')) {
         }
           // build out the sub menu items
           add_submenu_page(
-            $this->menu_slug,
-            ucfirst($submenu_item),
-            ucwords($submenu_item),
+            //$this->menu_slug,
+            $this->display_submenu_link(),
+            ucfirst(__($submenu_item)),
+            ucwords(__($submenu_item)),
             $this->capability,
             $submenu_slug,
             array( $this, 'menu_callback' )
@@ -540,13 +545,14 @@ if (!class_exists('WPAdminPage\AdminPage')) {
          * Here is where we build a custom settings section under
          * the settings menu in WordPress Admin Backend
          * this is only accessible to Administrators
+         * @link https://developer.wordpress.org/reference/functions/__/
          */
         foreach ($this->settings_arg() as $akey => $admin_item) {
           $admin_slug = sanitize_title($admin_item);
           add_submenu_page(
             $this->parent_slug,
-            ucfirst($admin_item),
-            ucwords($admin_item),
+            ucfirst(__($admin_item)),
+            ucwords(__($admin_item)),
             $this->admin_only_capability,
             $admin_slug,
             array( $this, 'adminonly_callback' )
