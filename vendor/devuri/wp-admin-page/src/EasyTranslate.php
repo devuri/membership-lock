@@ -1,6 +1,6 @@
 <?php
 
-namespace WPAdminPage\Translate\Form;
+namespace WPAdminPage;
 
 /**
  *
@@ -13,29 +13,20 @@ class Translate_Easy {
 	 * the textdomain for the current plugin
 	 * @var string
 	 */
-	private $textdomain;
-
-	/**
-	 * __construct
-	 *
-	 * new up and get the plugin textdomain
-	 * @param object $plugin [get the current plugin object]
-	 * @param string $plugin_textdomain [plugin textdomain]
-	 */
-	function __construct( object $plugin , string $plugin_textdomain = 'default' ) {
-		// plugin textdomain
-		$this->textdomain = $plugin->textdomain;
-	}
+	private $textdomain = 'defualt';
 
 	/**
 	 * Translate
 	 *
 	 * translate_text('some text')
 	 * @param string $text_to_translate
+	 * @link https://developer.wordpress.org/reference/functions/__/
 	 * @link https://developer.wordpress.org/reference/functions/translate/
+	 * @link https://wordpress.stackexchange.com/questions/147633/when-to-use-e-and-for-the-translation
 	 */
 	public function translate_text( string $text_to_translate='' ) {
-			$text = translate( $text_to_translate, $this->textdomain );
+			//$text = __( $text_to_translate, $this->textdomain );
+			$text = __($text_to_translate);
 			return $text;
 	}
 

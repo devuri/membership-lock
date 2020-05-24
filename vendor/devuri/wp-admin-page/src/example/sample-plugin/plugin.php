@@ -48,10 +48,8 @@
     define("MYPLGN_URL", plugins_url( "/",__FILE__ ));
 #  -----------------------------------------------------------------------------
 
-
-
-  require_once MYPLGN_DIR . '/vendor/wp-admin-page/AdminPage.php';
-  require_once MYPLGN_DIR . '/vendor/wp-admin-page/Form/FormHelper.php';
+    // You can install via Composer.
+    require_once 'vendor/autoload.php';
 
   // Menu Item
   require_once plugin_dir_path( __FILE__ ). 'src/Admin/MyPluginAdmin.php';

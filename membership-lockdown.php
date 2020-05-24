@@ -150,8 +150,10 @@ final class Si_Member_Lockdown {
 #  ----------------------------------------------------------------------------
   New Si_Member_Lockdown();
 
-
-    require_once SWMLD_DIR . '/vendor/wp-admin-page/AdminPage.php';
+  /**
+	 * Load admin page class via composer
+	 */
+	require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
   // Menu Item
   require_once plugin_dir_path( __FILE__ ). 'src/Admin/MembershipLockAdmin.php';
