@@ -1,36 +1,26 @@
 <?php
 /**
- * Plugin Name: Membership Lock
- * Plugin URI:  https://switchwebdev.com/wordpress-plugins/
- * Description: Membership Lock down lets you easily lock all post content including attached images, video, docs, and everything else.
- * Author:      SwitchWebdev.com
- * Author URI:  https://switchwebdev.com
- * Version:     2.1.6
- * License:     GPLv2
- * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain: sw-membership-lockdown
+ * Membership Lock
  *
- * Requires PHP: 5.6+
- * Tested up to PHP: 7.3
+ * @package           MembershipLock
+ * @author            Uriel Wilson
+ * @copyright         2020 Uriel Wilson
+ * @license           GPL-2.0
+ * @link           		https://urielwilson.com
  *
- * Copyright 2020 Uriel Wilson, support@switchwebdev.com
- * License: GNU General Public License
- * GPLv2 Full license details in license.txt
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- * ----------------------------------------------------------------------------
- * @category  	Plugin
- * @copyright 	Copyright © 2020 Uriel Wilson.
- * @package   	MembershipLockdown
- * @author    	Uriel Wilson
- * @link      	https://switchwebdev.com
- *  ----------------------------------------------------------------------------
+ * @wordpress-plugin
+ * Plugin Name:       Membership Lock
+ * Plugin URI:        https://switchwebdev.com/wordpress-plugins/
+ * Description:       Membership Lock down lets you easily lock all post content including attached images, video, docs, and everything else.
+ * Version:           2.1.6
+ * Requires at least: 3.4
+ * Requires PHP:      5.6
+ * Author:            SwitchWebdev.com
+ * Author URI:        https://switchwebdev.com
+ * Text Domain:       membership-lock
+ * Domain Path:       languages
+ * License:           GPLv2
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
   # deny direct access
