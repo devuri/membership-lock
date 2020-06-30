@@ -4,6 +4,9 @@
 
 Membership Lock down lets you easily lock all post content including attached images, video, docs, and everything else.
 
+![Membership_Lockdown_‹_Woo_—_WordPress](https://user-images.githubusercontent.com/4777400/86141936-3f7b1080-bab8-11ea-8599-9a67fcadf865.png)
+
+
 
 ## Description
 
