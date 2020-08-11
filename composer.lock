@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "84f6e17a0cd6e1a4572d421e3084e3ac",
+    "content-hash": "9ef25a6d8aee7f4a2c8885ea5c558f1b",
     "packages": [
         {
             "name": "devuri/wp-admin-page",
-            "version": "1.1.5",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/devuri/wp-admin-page.git",
-                "reference": "bbe8fc134ec0b59a84e6d259fa913688ed597d3a"
+                "reference": "a0e49a703c93825921074a35b962eb90e149841d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/devuri/wp-admin-page/zipball/bbe8fc134ec0b59a84e6d259fa913688ed597d3a",
-                "reference": "bbe8fc134ec0b59a84e6d259fa913688ed597d3a",
+                "url": "https://api.github.com/repos/devuri/wp-admin-page/zipball/a0e49a703c93825921074a35b962eb90e149841d",
+                "reference": "a0e49a703c93825921074a35b962eb90e149841d",
                 "shasum": ""
             },
             "require": {
@@ -31,12 +31,14 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-2.0"
+                "GPL-2.0-only"
             ],
             "authors": [
                 {
                     "name": "Uriel Wilson",
-                    "email": "hello@urielwilson.com"
+                    "email": "hello@urielwilson.com",
+                    "homepage": "https://urielwilson.com",
+                    "role": "Developer"
                 }
             ],
             "description": "WP Admin Page is Quick and Easy way to build out Admin Menu Pages For WordPress",
@@ -46,7 +48,7 @@
                 "wordpress",
                 "wp"
             ],
-            "time": "2020-05-22T01:13:20+00:00"
+            "time": "2020-08-09T03:00:53+00:00"
         }
     ],
     "packages-dev": [],
