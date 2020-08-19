@@ -31,7 +31,7 @@
   # plugin directory
 	  define("SWMLD_VERSION", '2.3.1');
 
-  # plugin directory
+  # plugin directory 
     define("SWMLD_DIR", dirname(__FILE__));
 
   # plugin url
