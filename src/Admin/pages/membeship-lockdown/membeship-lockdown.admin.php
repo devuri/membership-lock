@@ -1,4 +1,7 @@
 <?php
+
+	use MembershipLock\LockItdown;
+
 /**
  * Process the data
  *
@@ -26,7 +29,7 @@ if ( isset( $_POST['submit'] ) ){
 }
 ?><div class"lockdown">
 		<div class"lockdown-status">
-			<?php echo Si_Member_Lockdown::status() ?>
+			<?php echo LockItdown::status() ?>
 		</div>
 		<hr/>
 		<strong>Warning:</strong> When Membership Lockdown is turned on, all access to your entire site will be affected.
@@ -41,7 +44,7 @@ if ( isset( $_POST['submit'] ) ){
 <div id="frmwrap" >
 		<form action="" method="POST"	enctype="multipart/form-data"><?php
 			// submit button
-			echo Si_Member_Lockdown::lock_button();
+			echo LockItdown::lock_button();
 	    // nonce_field
 	    $this->form()->nonce();
 	?></form>

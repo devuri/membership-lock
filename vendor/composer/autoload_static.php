@@ -7,16 +7,16 @@ namespace Composer\Autoload;
 class ComposerStaticInit78b2fc3ed8d44f0dd86ca5d881dc3ce2
 {
     public static $prefixLengthsPsr4 = array (
-        'W' => 
+        'M' => 
         array (
-            'WPAdminPage\\' => 12,
+            'MembershipLock\\' => 15,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'WPAdminPage\\' => 
+        'MembershipLock\\' => 
         array (
-            0 => __DIR__ . '/..' . '/devuri/wp-admin-page/src',
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
