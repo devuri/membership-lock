@@ -32,15 +32,18 @@ final class LockItdown {
    * all data will be locked behind authentication
    * REST API data will not be available.
    * TODO add a message to the rest API
-   * @since 1.0
+   * @link https://developer.wordpress.org/reference/functions/auth_redirect/
    */
   public function membershiplock() {
+
+	global $pagenow;
+
     if ( ! is_user_logged_in() ){
-      if ($GLOBALS['pagenow'] === 'wp-login.php') {
-        } else {
-          wp_safe_redirect( wp_login_url() );
-          exit;
-      }
+
+		if ( 'wp-login.php' !== $pagenow ) {
+			auth_redirect();
+		}
+
     }
   }
 
