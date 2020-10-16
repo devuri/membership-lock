@@ -4,32 +4,33 @@ use MembershipLock\LockItdown;
 
 /**
  * Process the data
- *
  */
-if ( isset( $_POST['submit'] ) ){
+if ( isset( $_POST['submit'] ) ) { // @codingStandardsIgnoreLine
 
-	if ( ! $this->form()->verify_nonce()  ) {
-		wp_die($this->form()->user_feedback('error','Verification Failed !!!'));
+	if ( ! $this->form()->verify_nonce() ) {
+		wp_die( $this->form()->user_feedback( 'error', 'Verification Failed !!!' ) ); // @codingStandardsIgnoreLine
 	}
 
-	// get the lcg_value
-	$slockdown = $this->form()->input_val('membership_lockdown');
+	// get the lcg_value.
+	$slockdown = $this->form()->input_val( 'membership_lockdown' );
 
-	// clean up before we save
-	sanitize_text_field($slockdown);
+	// clean up before we save.
+	sanitize_text_field( $slockdown );
 
-	// numbers only
-	if ( ! is_numeric($slockdown) ) {
-		wp_die($this->form()->user_feedback('error','you need to choose something'));
+	// numbers only.
+	if ( ! is_numeric( $slockdown ) ) {
+		wp_die( $this->form()->user_feedback( 'error', 'you need to choose something' ) ); // @codingStandardsIgnoreLine
 	}
 
-	// update the lockdown status
-	update_option('mlockdown_status', $slockdown);
+	// update the lockdown status.
+	update_option( 'mlockdown_status', $slockdown );
 
 }
 ?><div class"lockdown">
 		<div class"lockdown-status">
-			<?php echo LockItdown::setup()->status() ?>
+			<?php
+				echo LockItdown::setup()->status() // @codingStandardsIgnoreLine
+			?>
 		</div>
 		<hr/>
 		<strong>Warning:</strong> When Membership Lockdown is turned on, all access to your entire site will be affected.
@@ -42,10 +43,13 @@ if ( isset( $_POST['submit'] ) ){
 </div>
 <hr/>
 <div id="frmwrap" >
-		<form action="" method="POST"	enctype="multipart/form-data"><?php
-			// submit button
-			echo LockItdown::setup()->lock_button();
-	    // nonce_field
-	    $this->form()->nonce();
-	?></form>
+	<form action="" method="POST"	enctype="multipart/form-data">
+		<?php
+			// submit button.
+			echo LockItdown::setup()->lock_button(); // @codingStandardsIgnoreLine
+
+			// nonce_field.
+		    $this->form()->nonce();
+		?>
+	</form>
 </div><!--frmwrap-->
