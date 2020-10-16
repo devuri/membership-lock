@@ -6,13 +6,13 @@
  * @author          Uriel Wilson
  * @copyright       2020 Uriel Wilson
  * @license         GPL-2.0
- * @link           	https://urielwilson.com
+ * @link            https://urielwilson.com
  *
  * @wordpress-plugin
  * Plugin Name:       Membership Lock
  * Plugin URI:        https://switchwebdev.com/wordpress-plugins/
  * Description:       Membership Lock down lets you easily lock all post content including attached images, video, docs, and everything else.
- * Version:           2.3.3
+ * Version:           2.3.4
  * Requires at least: 3.4
  * Requires PHP:      5.6
  * Author:            SwitchWebdev.com
@@ -23,39 +23,40 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-  # deny direct access
-    if ( ! defined( 'WPINC' ) ) {
-      die;
-    }
+	// deny direct access.
+	if ( ! defined( 'WPINC' ) ) {
+		die;
+	}
 
-  	# plugin directory
-	define("SWMLD_VERSION", '2.3.3');
+	// plugin directory.
+	define( 'SWMLD_VERSION', '2.3.4' );
 
-  	# plugin directory
-    define("SWMLD_DIR", dirname(__FILE__));
+	// plugin directory.
+	define( 'SWMLD_DIR', dirname( __FILE__ ) );
 
-  	# plugin url
-    define("SWMLD_URL", plugins_url( "/",__FILE__ ));
+	// plugin url.
+	define( 'SWMLD_URL', plugins_url( '/', __FILE__ ) );
 
 	/**
 	 * Load composer
 	 */
 	require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
-#  -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 
-	// Activate
+	// Activate.
 	register_activation_hook( __FILE__, function() {
-		$lockdown_status = 0;
-		update_option('mlockdown_status', $lockdown_status);
-	});
+			$lockdown_status = 0;
+			update_option( 'mlockdown_status', $lockdown_status );
+		}
+	);
 
-# ------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
-  	// setup the lock
-  	MembershipLock\LockItdown::setup()->lock();
+	// setup the lock.
+	MembershipLock\LockItdown::setup()->lock();
 
- 	/**
- 	 * Load Admin Pages
- 	 */
+	/**
+	 * Load Admin Pages.
+	 */
 	MembershipLock\Admin\MembershipAdmin::init();
