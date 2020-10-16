@@ -1,9 +1,9 @@
 on: pull_request
 
-name: Inspections
+name: Code Inspections
 jobs:
   runPHPCSInspection:
-    name: Run PHPCS inspection
+    name: PHPCS Inspection
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
