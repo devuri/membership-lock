@@ -1,10 +1,10 @@
 === Membership Lock ===
-Contributors: icelayer, sirwil
+Contributors: icelayer
 Donate link: https://switchwebdev.com/wordpress-plugins/
 Tags: privacy, members-only, membership, memberships,lock,Restrict access
 Requires at least: 4.0
 Tested up to: 5.5
-Stable tag: 2.3.7
+Stable tag: 2.4.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
