@@ -35,7 +35,7 @@ final class LockItdown {
 	 * [__construct description]
 	 */
 	private function __construct() {
-	    add_action( 'admin_enqueue_scripts', array( $this, 'si_lockdown_styles' ), 10 );
+	    // nothing to do here.
 	}
 
 	/**
@@ -49,12 +49,6 @@ final class LockItdown {
 		}
 	}
 
-	/**
-	 * Lockdown styles
-	 */
-	public function si_lockdown_styles() {
-		wp_enqueue_style( 'lockdown-style', plugin_dir_url( __FILE__ ) . 'includes/admin/css/slockdown.css', array(), SWMLD_VERSION, 'all' );
-	}
 
   	/**
   	 * Redirect to the Login Page
