@@ -56,8 +56,9 @@ endif;
 	<form action="" method="POST"	enctype="multipart/form-data">
 		<?php
 
-			// REST API submit button.
-			echo LockItdown::setup()->rest_api_button(); // @codingStandardsIgnoreLine
+			if ( get_option( 'mlockdown_status', false ) ) {
+				echo LockItdown::setup()->rest_api_button(); // @codingStandardsIgnoreLine.
+			}
 
 			// LOCKDOWN submit button.
 			echo LockItdown::setup()->lock_button(); // @codingStandardsIgnoreLine
