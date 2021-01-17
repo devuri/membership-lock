@@ -49,6 +49,25 @@ final class LockItdown {
 		}
 	}
 
+	/**
+	 * Checks if the current request is a WP REST API request.
+	 *
+	 * @returns boolean
+	 * @link https://gist.github.com/devuri/f9654cc59a2a4251005ac1be0ff1a9af
+	 */
+	public function is_rest() {
+		$prefix = rest_get_url_prefix( );
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST
+			|| isset($_GET['rest_route'])
+				&& strpos( trim( $_GET['rest_route'], '\\/' ), $prefix , 0 ) === 0)
+				return true;
+		global $wp_rewrite;
+		if ( $wp_rewrite === null ) $wp_rewrite = new WP_Rewrite();
+		$rest_url = wp_parse_url( trailingslashit( rest_url( ) ) );
+		$current_url = wp_parse_url( add_query_arg( array( ) ) );
+		return strpos( $current_url['path'], $rest_url['path'], 0 ) === 0;
+	}
+
 
   	/**
   	 * Redirect to the Login Page
@@ -62,6 +81,10 @@ final class LockItdown {
 	public function membershiplock() {
 
 		global $pagenow;
+
+		if ( $this->is_rest() ) {
+			return;
+		}
 
 	    if ( ! is_user_logged_in() ) {
 
