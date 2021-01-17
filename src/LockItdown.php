@@ -75,7 +75,7 @@ final class LockItdown {
 	 *
 	 * @return bool
 	 */
-	public function enable_rest_api() {
+	public function disable_rest_api() {
 
 		if ( get_option( 'mlockdown_rest_api', false ) ) {
 			return true;
@@ -96,7 +96,7 @@ final class LockItdown {
 
 		global $pagenow;
 
-		if ( $this->enable_rest_api() && $this->is_rest() ) {
+		if ( $this->disable_rest_api() && $this->is_rest() ) {
 			return;
 		}
 
