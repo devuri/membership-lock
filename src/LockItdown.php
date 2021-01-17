@@ -49,6 +49,39 @@ final class LockItdown {
 		}
 	}
 
+	/**
+	 * Checks if the current request is a WP REST API request.
+	 *
+	 * @returns boolean
+	 * @link https://gist.github.com/devuri/f9654cc59a2a4251005ac1be0ff1a9af
+	 */
+	public function is_rest() {
+		$prefix = rest_get_url_prefix( );
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST
+			|| isset($_GET['rest_route'])
+				&& strpos( trim( $_GET['rest_route'], '\\/' ), $prefix , 0 ) === 0)
+				return true;
+		global $wp_rewrite;
+		if ( $wp_rewrite === null ) $wp_rewrite = new WP_Rewrite();
+		$rest_url = wp_parse_url( trailingslashit( rest_url( ) ) );
+		$current_url = wp_parse_url( add_query_arg( array( ) ) );
+		return strpos( $current_url['path'], $rest_url['path'], 0 ) === 0;
+	}
+
+	/**
+	 * WordPress REST API.
+	 *
+	 * Checks if we should lock the the WordPress REST API.
+	 *
+	 * @return bool
+	 */
+	public function disable_rest_api() {
+
+		if ( get_option( 'mlockdown_rest_api', false ) ) {
+			return true;
+		}
+		return false;
+	}
 
   	/**
   	 * Redirect to the Login Page
@@ -62,6 +95,10 @@ final class LockItdown {
 	public function membershiplock() {
 
 		global $pagenow;
+
+		if ( $this->disable_rest_api() && $this->is_rest() ) {
+			return;
+		}
 
 	    if ( ! is_user_logged_in() ) {
 
@@ -107,6 +144,23 @@ final class LockItdown {
 	        text-transform: capitalize;
 	        padding-left: 8px;
 	        padding-right: 8px;" class="lockdown status-on">disabled</span>';
+	    }
+	}
+
+	/**
+	 * The REST API button
+	 *
+	 * @return string button
+	 */
+	public function rest_api_button() {
+	    if ( get_option( 'mlockdown_rest_api', false ) ) {
+		    $button = '<input type="hidden" id="mlockdown_rest_api" name="mlockdown_rest_api" value="0">';
+		    $button .= get_submit_button( 'Disable REST API', 'primary', 'submit_rest_api');
+		    return $button;
+	    } else {
+	      	$button = '<input type="hidden" id="mlockdown_rest_api" name="mlockdown_rest_api" value="1">';
+	      	$button .= get_submit_button( 'Enable REST API', '', 'submit_rest_api');
+	      	return $button;
 	    }
 	}
 

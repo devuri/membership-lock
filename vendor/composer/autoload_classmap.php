@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'MembershipLock\\Admin\\MembershipAdmin' => $baseDir . '/src/Admin/MembershipAdmin.php',
     'MembershipLock\\LockItdown' => $baseDir . '/src/LockItdown.php',
     'MembershipLock\\WPAdminPage\\AdminPage' => $baseDir . '/src/WPAdminPage/AdminPage.php',
