@@ -148,6 +148,23 @@ final class LockItdown {
 	}
 
 	/**
+	 * The REST API button
+	 *
+	 * @return string button
+	 */
+	public function rest_api_button() {
+	    if ( get_option( 'mlockdown_rest_api', false ) ) {
+		    $button = '<input type="hidden" id="mlockdown_rest_api" name="mlockdown_rest_api" value="0">';
+		    $button .= get_submit_button( 'Disable REST API', 'primary', 'submit_rest_api');
+		    return $button;
+	    } else {
+	      	$button = '<input type="hidden" id="mlockdown_rest_api" name="mlockdown_rest_api" value="1">';
+	      	$button .= get_submit_button( 'Enable REST API', 'primary', 'submit_rest_api');
+	      	return $button;
+	    }
+	}
+
+	/**
 	 * The lock button
 	 *
 	 * @return string button
