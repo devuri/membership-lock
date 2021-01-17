@@ -159,7 +159,7 @@ final class LockItdown {
 		    return $button;
 	    } else {
 	      	$button = '<input type="hidden" id="mlockdown_rest_api" name="mlockdown_rest_api" value="1">';
-	      	$button .= get_submit_button( 'Enable REST API', 'primary', 'submit_rest_api');
+	      	$button .= get_submit_button( 'Enable REST API', '', 'submit_rest_api');
 	      	return $button;
 	    }
 	}
