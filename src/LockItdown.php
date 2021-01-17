@@ -68,6 +68,20 @@ final class LockItdown {
 		return strpos( $current_url['path'], $rest_url['path'], 0 ) === 0;
 	}
 
+	/**
+	 * WordPress REST API.
+	 *
+	 * Checks if we should lock the the WordPress REST API.
+	 *
+	 * @return bool
+	 */
+	public function enable_rest_api() {
+
+		if ( get_option( 'mlockdown_rest_api', false ) ) {
+			return true;
+		}
+		return false;
+	}
 
   	/**
   	 * Redirect to the Login Page
@@ -82,7 +96,7 @@ final class LockItdown {
 
 		global $pagenow;
 
-		if ( $this->is_rest() ) {
+		if ( $this->enable_rest_api() && $this->is_rest() ) {
 			return;
 		}
 
