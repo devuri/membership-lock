@@ -30,7 +30,6 @@ if ( isset( $_POST['submit_rest_api'] ) ) : // @codingStandardsIgnoreLine
   }
 
   $mlockdown_rest_api = absint( $this->form()->input_val( 'mlockdown_rest_api' ) );
-  var_dump($mlockdown_rest_api);
   if ( ! is_numeric( $mlockdown_rest_api ) ) {
 	  wp_die( $this->form()->user_feedback( 'error', 'you need to choose something' ) ); // @codingStandardsIgnoreLine
   }
