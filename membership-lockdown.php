@@ -46,8 +46,7 @@
 
 	// Activate.
 	register_activation_hook( __FILE__, function() {
-			$lockdown_status = 0;
-			update_option( 'mlockdown_status', $lockdown_status );
+			update_option( 'mlockdown_status', 0 );
 		}
 	);
 
