@@ -58,4 +58,6 @@
 	/**
 	 * Load Admin Pages.
 	 */
-	MembershipLock\Admin\MembershipAdmin::init();
+	if ( is_admin() ) :
+		MembershipLock\Admin\MembershipAdmin::init();
+	endif;
