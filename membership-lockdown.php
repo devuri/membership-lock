@@ -12,7 +12,7 @@
  * Plugin Name:       Membership Lock
  * Plugin URI:        https://switchwebdev.com/wordpress-plugins/
  * Description:       Membership Lock down lets you easily lock all post content including attached images, video, docs, and everything else.
- * Version:           2.4.6
+ * Version:           2.4.8
  * Requires at least: 3.4
  * Requires PHP:      5.6
  * Author:            Uriel Wilson
@@ -58,4 +58,6 @@
 	/**
 	 * Load Admin Pages.
 	 */
-	MembershipLock\Admin\MembershipAdmin::init();
+	if ( is_admin() ) :
+		MembershipLock\Admin\MembershipAdmin::init();
+	endif;
