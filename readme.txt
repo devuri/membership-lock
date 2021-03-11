@@ -3,7 +3,7 @@ Contributors: icelayer
 Donate link: https://switchwebdev.com/wordpress-plugins/
 Tags: privacy, members-only, membership, memberships,lock,Restrict access
 Requires at least: 4.0
-Tested up to: 5.6
+Tested up to: 5.7
 Stable tag: 2.4.6
 Requires PHP: 5.6
 License: GPLv2 or later
