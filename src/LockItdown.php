@@ -114,8 +114,16 @@ final class LockItdown {
   	 * @return boolean
   	 */
 	public function lockdown() {
-	    $lockdown = get_option( 'mlockdown_status' );
-	    return $lockdown;
+	    return get_option( 'mlockdown_status' );
+	}
+
+	/**
+  	 * Get the basic_auth lock status
+  	 *
+  	 * @return boolean
+  	 */
+	public static function basic_auth_lock() {
+	    return get_option( 'mlock_basic_auth' );
 	}
 
   	/**
@@ -123,9 +131,10 @@ final class LockItdown {
   	 *
   	 * @return string
   	 */
-	public function status() {
-	    if ( $this->lockdown() ) {
-	      	return 'Status: <span style="
+	protected static function status( $lock, $status )
+	{
+		if ( $status ) {
+	      	return '<span style="
 	        text-align: center;
 	        border: solid 2px #02af07;
 	        color: #02af07;
@@ -133,9 +142,9 @@ final class LockItdown {
 	        font-weight: 600;
 	        text-transform: capitalize;
 	        padding-left: 8px;
-	        padding-right: 8px;" class="lockdown status-on">enabled</span>';
+	        padding-right: 8px;" class="lockdown status-on">'.strtoupper( $lock ).' enabled</span>';
 	    } else {
-	      	return 'Status: <span style="
+	      	return '<span style="
 	        text-align: center;
 	        border: solid 2px #af0202;
 	        color: #af0202;
@@ -143,8 +152,13 @@ final class LockItdown {
 	        font-weight: 600;
 	        text-transform: capitalize;
 	        padding-left: 8px;
-	        padding-right: 8px;" class="lockdown status-on">disabled</span>';
+	        padding-right: 8px;" class="lockdown status-on">'.strtoupper( $lock ).' disabled</span>';
 	    }
+	}
+
+	public function get_lock_status( $lock, $status )
+	{
+		return 'Status: '. self::status( $lock, get_option( $status , false ) );
 	}
 
 	/**
@@ -170,6 +184,10 @@ final class LockItdown {
 	 * @return string button
 	 */
 	public function lock_button() {
+		// if ( self::basic_auth_lock() ) {
+		// 	return null;
+		// }
+
 	    if ( $this->lockdown() ) {
 		    $button = '<input type="hidden" id="membership_lockdown" name="membership_lockdown" value="0">';
 		    $button .= get_submit_button( 'Deactivate', 'browser button-hero' );
@@ -177,6 +195,23 @@ final class LockItdown {
 	    } else {
 	      	$button = '<input type="hidden" id="membership_lockdown" name="membership_lockdown" value="1">';
 	      	$button .= get_submit_button( 'Activate', 'button-primary button-hero' );
+	      	return $button;
+	    }
+	}
+
+	/**
+	 * The lock button
+	 *
+	 * @return string button
+	 */
+	public function basic_auth_button() {
+	    if ( self::basic_auth_lock() ) {
+		    $button = '<input type="hidden" id="basic_auth_lockdown" name="basic_auth_lockdown" value="0">';
+		    $button .= get_submit_button( 'Deactivate Basic Authentication', '', 'submit_basic_auth');
+		    return $button;
+	    } else {
+	      	$button = '<input type="hidden" id="basic_auth_lockdown" name="basic_auth_lockdown" value="1">';
+	      	$button .= get_submit_button( 'Activate Basic Authentication', 'button-primary button-hero', 'submit_basic_auth');;
 	      	return $button;
 	    }
 	}
