@@ -10,7 +10,7 @@
  * @copyright  Copyright © 2021 Uriel Wilson.
  * @package    MembershipLock
  * @author     Uriel Wilson
- * @link       https://switchwebdev.com
+ * @link       https://wpbrisko.com
  *  ----------------------------------------------------------------------------
  */
 

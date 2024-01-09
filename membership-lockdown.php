@@ -10,12 +10,12 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Membership Lock
- * Plugin URI:        https://switchwebdev.com/wordpress-plugins/
+ * Plugin URI:        https://wpbrisko.com/wordpress-plugins/
  * Description:       Membership Lock down lets you easily lock all post content including attached images, video, docs, and everything else.
  * Version:           2.5.0
  * Requires at least: 4.6
  * Requires PHP:      5.6
- * Author:            Uriel Wilson
+ * Author:            uriel
  * Author URI:        https://urielwilson.com
  * Text Domain:       membership-lock
  * Domain Path:       languages
