@@ -1,6 +1,6 @@
 === Membership Lock ===
 Contributors: icelayer
-Donate link: https://switchwebdev.com/wordpress-plugins/
+Donate link: https://wpbrisko.com/wordpress-plugins/
 Tags: privacy, members-only, membership, memberships,lock,Restrict access
 Requires at least: 4.0
 Tested up to: 5.7
